@@ -1,0 +1,15 @@
+[Unit]
+Description=xray-core service
+Documentation=https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target network-online.target
+
+[Service]
+Environment="XRAY_LOCATION_ASSET=/etc/xray"
+ExecStart=/usr/local/bin/xray run -confdir /etc/xray
+ExecReload=/bin/kill -HUP
+Restart=on-failure
+RestartSec=10s
+LimitNOFILE=infinity
+
+[Install]
+WantedBy=multi-user.target
